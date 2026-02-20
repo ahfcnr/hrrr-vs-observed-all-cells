@@ -160,7 +160,17 @@ function updatePlot() {
     const xMax = formatLocalISO(xMaxDate);
 
     const maxObs = obsValues.length > 0 ? Math.max(...obsValues) : 0;
-    const yMax = Math.ceil(maxObs) || 1; 
+    let forecastMax = 0;
+    forecastTraces.forEach(trace => {
+        const maxTrace = Math.max(...trace.y);
+        if (maxTrace > forecastMax) {
+              forecastMax = maxTrace;
+    }
+});
+
+// Final Y max = ceil(max of both)
+    const yMax = Math.ceil(Math.max(maxObs, forecastMax)) || 1;
+    
 
     const sharedLayout = {
         xaxis: {
@@ -197,4 +207,5 @@ function updatePlot() {
         ...sharedLayout,
         title: `Observed Rainfall – ${region}`
     });
+
 }
