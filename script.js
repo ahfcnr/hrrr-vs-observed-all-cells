@@ -176,12 +176,13 @@ function updatePlot() {
     forecastTraces.forEach(trace => {
         const maxTrace = Math.max(...trace.y);
         if (maxTrace > forecastMax) {
-              forecastMax = maxTrace;
+             forecastMax = maxTrace;
     }
 });
 
 // Final Y max = ceil(max of both)
     const yMax = Math.ceil(Math.max(maxObs, forecastMax)) || 1;
+
     
 
     const sharedLayout = {
@@ -219,6 +220,7 @@ function updatePlot() {
         ...sharedLayout,
         title: `Observed Rainfall – ${region}`
     });
+
     const imgElement = document.getElementById("regionPhoto");
     const titleElement = document.getElementById("imageTitle");
     
@@ -230,6 +232,4 @@ function updatePlot() {
         imgElement.style.display = "none";
         titleElement.innerText = "";
     }
-
 }
-
